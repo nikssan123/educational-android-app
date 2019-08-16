@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- FFBB4919 orange
+    FFD7774E opaque orange
+    #D81B60 colorAccent
+    -->
+    <!-- 008577 -->
+    <color name="colorPrimary">#FFBB4919</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#000</color>
+    <color name="colorButtonAnswerRight">#FF038209</color>
+    <color name="colorButtonAnswerWrong">#FFB82804</color>
+    <color name="colorSideMenuBackground">#FFFAF1ED</color>
+    <color name="colorHeroes">#FF740E08</color>
+    <color name="colorNavHeaderMain">#F39B6C</color>
+    <color name="colorNoInternet">#09A709</color>
+    <color name="testing">#037E03</color>
+</resources>

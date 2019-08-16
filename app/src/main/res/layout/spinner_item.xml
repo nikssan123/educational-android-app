@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:gravity="center_vertical"
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:textSize="@dimen/smallTextSize"
+    android:textColor="#000"/>
+
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/textViewSpinnerItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="start"
+    android:paddingStart="10dip"
+    android:paddingLeft="10dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="3dip"
+    android:textColor="#000"
+    android:textSize="@dimen/smallTextSize" />
+-->

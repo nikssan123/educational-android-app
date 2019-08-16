@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "94915063220",
+    "firebase_url": "https://matura-bel-fornax-elit.firebaseio.com",
+    "project_id": "matura-bel-fornax-elit",
+    "storage_bucket": "matura-bel-fornax-elit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94915063220:android:bbb5cf216ff3c3d6",
+        "android_client_info": {
+          "package_name": "com.FornaxElit.MaturaBel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94915063220-n7no7dd5qf1g0qv1qk40r2gplvoc2eob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIHmhxIMbntBXOso_SAW9bQz7bxd-TstU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94915063220-n7no7dd5qf1g0qv1qk40r2gplvoc2eob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5283989799923871~6950893953"
+    }
+  ],
+  "configuration_version": "1"
+}

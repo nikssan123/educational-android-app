@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@android:color/black"/>
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center">
+        <bitmap android:src="@drawable/owl_pic_transperent_full_color_splash_screen" android:gravity="center" />
+    </item>
+</layer-list>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Литература">
+        <menu>
+            <item
+                android:id="@+id/nav_lit"
+                android:icon="@drawable/baseline_info_black_18dp"
+                android:title="Материали"/>
+            <item
+                android:id="@+id/nav_testsLit"
+                android:icon="@drawable/question_mark1"
+                android:title="Тестове"/>
+            <item
+                android:id="@+id/nav_analysis"
+                android:icon="@drawable/baseline_library_books_black_18dp"
+                android:title="Уводи/Анализи"/>
+        </menu>
+    </item>
+
+    <item android:title="Български език">
+        <menu>
+            <item
+                android:id="@+id/nav_bg"
+                android:icon="@drawable/baseline_info_black_18dp"
+                android:title="Норми"/>
+            <item
+                android:id="@+id/nav_testsBg"
+                android:icon="@drawable/question_mark1"
+                android:title="Тест"/>
+        </menu>
+    </item>
+
+
+    <item android:title="Други">
+        <menu>
+            <item
+                android:id="@+id/nav_report"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Докладвайте грешка" />
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:icon="@drawable/baseline_vpn_key_black_18dp"
+                android:title="Privacy Policy"/>
+        </menu>
+    </item>
+
+</menu>
