@@ -53,6 +53,10 @@ public class ActivityQuiz extends AppCompatActivity {
     List<Question> geoMilevQuestions;
     List<Question> atanasDalchevQuestions;
     List<Question> elisavetaBagrqnaQuestions;
+    List<Question> yordanYovkovQuestions;
+    List<Question> nikolaVapcarovQuestions;
+    List<Question> dimityrDimovQuestions;
+    List<Question> dimityrTalevQuestions;
     List<Question> belQuestions;
     List<Question> questionsCurrent = new ArrayList<>();
 
@@ -74,6 +78,10 @@ public class ActivityQuiz extends AppCompatActivity {
         geoMilevQuestions = quizDbHelper.geoMilevQuestions();
         atanasDalchevQuestions = quizDbHelper.atanasDalchevQuestions();
         elisavetaBagrqnaQuestions = quizDbHelper.elisavetaBagrqnaQuestions();
+        yordanYovkovQuestions = quizDbHelper.yordanYovkovQuestions();
+        nikolaVapcarovQuestions = quizDbHelper.nikolaVapcarovQuestions();
+        dimityrDimovQuestions = quizDbHelper.dimityrDimovQuestions();
+        dimityrTalevQuestions = quizDbHelper.dimityrTalevQuestions();
 
 
 
@@ -168,12 +176,20 @@ public class ActivityQuiz extends AppCompatActivity {
                 questionsCurrent.addAll(elisavetaBagrqnaQuestions);
                 break;
             case 12:
+                questionsCurrent.clear();
+                questionsCurrent.addAll(yordanYovkovQuestions);
                 break;
             case 13:
+                questionsCurrent.clear();
+                questionsCurrent.addAll(nikolaVapcarovQuestions);
                 break;
             case 14:
+                questionsCurrent.clear();
+                questionsCurrent.addAll(dimityrDimovQuestions);
                 break;
             case 15:
+                questionsCurrent.clear();
+                questionsCurrent.addAll(dimityrTalevQuestions);
                 break;
             case 16:
                 questionsCurrent.clear();
@@ -188,6 +204,10 @@ public class ActivityQuiz extends AppCompatActivity {
                 questionsForAll.addAll(geoMilevQuestions);
                 questionsForAll.addAll(atanasDalchevQuestions);
                 questionsForAll.addAll(elisavetaBagrqnaQuestions);
+                questionsForAll.addAll(yordanYovkovQuestions);
+                questionsForAll.addAll(nikolaVapcarovQuestions);
+                questionsForAll.addAll(dimityrDimovQuestions);
+                questionsForAll.addAll(dimityrTalevQuestions);
                 Collections.shuffle(questionsForAll);
                 for(int i =0; i < 20; i++){
                     questionsCurrent.add(questionsForAll.get(i));

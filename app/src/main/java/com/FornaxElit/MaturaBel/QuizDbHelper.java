@@ -15,7 +15,7 @@ import static android.database.sqlite.SQLiteDatabase.releaseMemory;
 public class QuizDbHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "MaturiApp.db";
-    private static final int DB_VERSION = 8;
+    private static final int DB_VERSION = 9;
     private static final String nameOfTable = "questionsForHristoBotev";
 
     private SQLiteDatabase db;
@@ -197,6 +197,60 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.execSQL(table10);
         fillQuestionTableForElisavetaBagrqna();
 
+        final String table11 = "CREATE TABLE IF NOT EXISTS " +
+                "yordanYovkovTable" + "( " +
+                QuestionTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuestionTable.COLUMN_QUESTION + " TEXT, " +
+                QuestionTable.COLUMN_OPTION1 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION2 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION3 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION4 + " TEXT, " +
+                QuestionTable.COLUMN_ANSWER_NR + " INTEGER" +
+                ")";
+        db.execSQL(table11);
+        fillQuestionTableForYordanYovkov();
+
+        final String table12 = "CREATE TABLE IF NOT EXISTS " +
+                "nikolaVapcarovTable" + "( " +
+                QuestionTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuestionTable.COLUMN_QUESTION + " TEXT, " +
+                QuestionTable.COLUMN_OPTION1 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION2 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION3 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION4 + " TEXT, " +
+                QuestionTable.COLUMN_ANSWER_NR + " INTEGER" +
+                ")";
+        db.execSQL(table12);
+        fillQuestionTableForNikolaVapcarov();
+
+
+        final String table13 = "CREATE TABLE IF NOT EXISTS " +
+                "dimityrDimovTable" + "( " +
+                QuestionTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuestionTable.COLUMN_QUESTION + " TEXT, " +
+                QuestionTable.COLUMN_OPTION1 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION2 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION3 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION4 + " TEXT, " +
+                QuestionTable.COLUMN_ANSWER_NR + " INTEGER" +
+                ")";
+        db.execSQL(table13);
+        fillQuestionTableForDimityrDimov();
+
+
+        final String table14 = "CREATE TABLE IF NOT EXISTS " +
+                "dimityrTalevTable" + "( " +
+                QuestionTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuestionTable.COLUMN_QUESTION + " TEXT, " +
+                QuestionTable.COLUMN_OPTION1 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION2 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION3 + " TEXT, " +
+                QuestionTable.COLUMN_OPTION4 + " TEXT, " +
+                QuestionTable.COLUMN_ANSWER_NR + " INTEGER" +
+                ")";
+        db.execSQL(table14);
+        fillQuestionTableForDimityrTalev();
+
         releaseMemory();
        // elisavetaBagrqnaTable
 
@@ -216,6 +270,10 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + "geoMilevTable");
         db.execSQL("DROP TABLE IF EXISTS " + "atanasDalchevTable");
         db.execSQL("DROP TABLE IF EXISTS " + "elisavetaBagrqnaTable");
+        db.execSQL("DROP TABLE IF EXISTS " + "yordanYovkovTable");
+        db.execSQL("DROP TABLE IF EXISTS " + "nikolaVapcarovTable");
+        db.execSQL("DROP TABLE IF EXISTS " + "dimityrDimovTable");
+        db.execSQL("DROP TABLE IF EXISTS " + "dimityrTalevTable");
         onCreate(db);
 
     }
@@ -802,6 +860,65 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         addQuestion(q20, "elisavetaBagrqnaTable");
     }
 
+    private void fillQuestionTableForYordanYovkov(){
+        Question q1 = new Question("Кой от посочените Йовкови разкази поставя проблема за греха и изкуплението?", "\"Индже\"", "\"Последна радост\"", "\"Другоселец\"", "\"Серафим\"", 1);
+        addQuestion(q1,"yordanYovkovTable");
+        Question q2 = new Question("Каква композиционна функция изпълнява убийството на Индже от Найден Гърбавото в разказа \"Индже\" на Йордан Йовков?", "епилог", "експозиция", "развръзка", "завръзка", 3);
+        addQuestion(q2,"yordanYovkovTable");
+        Question q3 = new Question("Кое от посочените произведения внушава идеята, че трудът осмисля човешкия живот?", "\"Андрешко\"", "\"Занемелите камбани\"", "\"Песента на колелетата\"", "\"Албена\"", 3);
+        addQuestion(q3,"yordanYovkovTable");
+        Question q4 = new Question("Мотото \"Радка на порти стоеше, отдолу иде Мустафа…\" е от разказа:", "\"Последна радост\"", "\"През чумавото\"", "\"Другоселец\"", "\"Шибил\"", 4);
+        addQuestion(q4,"yordanYovkovTable");
+        Question q5 = new Question("В творчеството на кого от посочените автори се откроява мотивът за всепобеждаващата сила на красотата?", "Пейо Яворов", "Димитър Димов", "Йордан Йовков", "Елисавета Багряна", 3);
+        addQuestion(q5,"yordanYovkovTable");
+    }
+
+    private void fillQuestionTableForNikolaVapcarov(){
+        Question q1 = new Question("В кой ред всички стихотворения са написани от Никола Вапцаров?", "\"Завод\", \"Сън\", \"Песента на човека\"", "\"Кино\", \"Повест\", \"История\"", "\"Песен за човека\", \"Ний\", \"Прощално\"", "\"Вяра\", \"Борбата е безмилостно жестока..\", \"Сън\"", 4);
+        addQuestion(q1,"nikolaVapcarovTable");
+        Question q2 = new Question("В коя от посочените творби присъства образът на озъбено свирепо куче?", "\"История\"", "\"Завод\"", "\"Песен за човека\"", "\"Кино\"", 3);
+        addQuestion(q2,"nikolaVapcarovTable");
+        Question q3 = new Question("За творчеството на кого от посочените автори са характерни образите на завода, ракетата, куршумите?", "Христо Смирненски", "Гео Милев", "Никола Вапцаров", "Иван Вазов", 3);
+        addQuestion(q3,"nikolaVapcarovTable");
+        Question q4 = new Question("Романтиката и вярата са мотиви от творчеството на:", "Никола Вапцаров", "Христо Смирненски", "Христо Ботев", "Димчо Дебелянов", 1);
+        addQuestion(q4,"nikolaVapcarovTable");
+
+        //Inspect bellow question !!!!!!!
+        Question q5 = new Question("Коя от посочените опозиции НЕ е от поезията на Никола Вапцаров?", "човекът и историята", "селото и градът", "сън и реалност", "мрак и светлина", 2);
+        addQuestion(q5,"nikolaVapcarovTable");
+        Question q6 = new Question("Кое от посочените твърдения НЕ е вярно?", "В България символизмът се появява в началото на XXв. и периодът му на разцвет е до времето на Балканската и на Първата световна война", "Поезията на Христо Смирненски отразява идейния и тематичния прелом в лириката на 20те години на XXв.", "Лириката на Никола Вапцаров очертава епохата от началото на XXв. до Първата световна война", "Фейлетоните на Алеко Константинов разкриват проблемите на българското общество през 90те години на XIXв.", 3);
+        addQuestion(q6,"nikolaVapcarovTable");
+        Question q7 = new Question("Коя от посочените творби НЕ е повлияна от фолклорната традиция?", "\"Кукувица\"", "\"Песен за човека\"", "\"На прощаване\"", "\"Ралица\"", 2);
+        addQuestion(q7,"nikolaVapcarovTable");
+        Question q8 = new Question("С кое историческо време е ангажирано творчеството на Никола Вапцаров?", "преди Освобождението", "между двете световни войни", "преди Първата световна война", "след Втората световна война", 2);
+        addQuestion(q8,"nikolaVapcarovTable");
+        Question q9 = new Question("Кой от посочените автори в лириката си води диалог с епохата, историята и живота?", "Иван Вазов", "Алеко Константинов", "Димитър Талев", "Никола Вапцаров", 4);
+        addQuestion(q9,"nikolaVapcarovTable");
+    }
+
+    private void fillQuestionTableForDimityrDimov(){
+        Question q1 = new Question("Борис, Павел и Стефан са герои от творба на:", "Елин Пелин", "Димитър Димов", "Димитър Талев", "Иван Вазов", 2);
+        addQuestion(q1,"dimityrDimovTable");
+        Question q2 = new Question("Кое твърдение НЕ е вярно?", "В романа на Димитър Димов \"Тютюн\" се открояват сложните психологически преживявания на героите.", "Основната тема на романа на Димитър Димов \"Тютюн\" е устойчивостта на възрожденските идеали в българското общество.", "Романът на Димитър Димов \"Тютюн\" акцентира върху човешките инстинкти и стремежите за издигане в обществото.", "Романът на Димитър Димов \"Тютюн\" разглежда конфликти в българското общество преди и по време на Втората световна война.", 2);
+        addQuestion(q2,"dimityrDimovTable");
+        Question q3 = new Question("Коя от посочените творби поставя началото на модерния български роман?", "\"Под игото\"", "\"Тютюн\"", "\"Гераците\"", "\"Бай Ганьо\"", 2);
+        addQuestion(q3,"dimityrDimovTable");
+        Question q4 = new Question("Коя от изброените творби е \"социална епопея\" на българската действителност от 30те и 40те години на XXв.?", "\"Септември\"", "\"Чичовци\"", "\"Епопея на забравените\"", "\"Тютюн\"", 4);
+        addQuestion(q4,"dimityrDimovTable");
+        Question q5 = new Question("Какъв е времевият интервал на действието в романа \"Тютюн\"", "от началото на XXв. до Деветоюнския преврат през 1923г.", "от края на XIXв. до Звенарския преврат през 1934г.", "от 20те години на XXв. до Деветосептемврийския преврат през 1944г.", "от началото на XXв. до Деветосептемрвийския преврат през 1944г.", 3);
+        addQuestion(q5,"dimityrDimovTable");
+
+    }
+
+    private void fillQuestionTableForDimityrTalev(){
+        Question q1 = new Question("Коя от посочените творби показва способността на хората да се обединят около национална идея?", "\"Железният светилник\"", "\"Да се завърнеш...\"", "\"Гераците\"", "\"Занемелите камбани\"", 1);
+        addQuestion(q1,"dimityrTalevTable");
+        Question q2 = new Question("Катерина и Рафе Клинче са герои от творбата:", "\"Под игото\"", "\"Железният светилник\"", "\"Тютюн\"", "\"Гераците\"", 2);
+        addQuestion(q2,"dimityrTalevTable");
+        Question q3 = new Question("В коя от посочените творби сюжетът се развива в историческия контекст на борбата на българския народ за независима църква във време на робство?", "\"Тютюн\"", "\"Дядо Йоцо гледа\"", "\"Железният светилник\"", "\"Разни хора, разни идеали\"", 3);
+        addQuestion(q3,"dimityrTalevTable");
+    }
+
 
     private void addQuestion(Question question, String tableName){
         ContentValues cv = new ContentValues();
@@ -1105,7 +1222,103 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         return questions;
     }
 
+    public List<Question> yordanYovkovQuestions(){
+        List<Question> questions = new ArrayList<>();
+        db = getReadableDatabase();
 
-    //elisavetaBagrqnaTable
+        Cursor c = db.rawQuery("SELECT * FROM " + "yordanYovkovTable", null);
+
+        if(c.moveToFirst()){
+            do{
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION4)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionTable.COLUMN_ANSWER_NR)));
+                questions.add(question);
+            }while (c.moveToNext());
+        }
+
+        c.close();
+
+        return questions;
+    }
+
+    public List<Question> nikolaVapcarovQuestions(){
+        List<Question> questions = new ArrayList<>();
+        db = getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + "nikolaVapcarovTable", null);
+
+        if(c.moveToFirst()){
+            do{
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION4)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionTable.COLUMN_ANSWER_NR)));
+                questions.add(question);
+            }while (c.moveToNext());
+        }
+
+        c.close();
+
+        return questions;
+    }
+
+    public List<Question> dimityrDimovQuestions(){
+        List<Question> questions = new ArrayList<>();
+        db = getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + "dimityrDimovTable", null);
+
+        if(c.moveToFirst()){
+            do{
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION4)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionTable.COLUMN_ANSWER_NR)));
+                questions.add(question);
+            }while (c.moveToNext());
+        }
+
+        c.close();
+
+        return questions;
+    }
+
+    public List<Question> dimityrTalevQuestions(){
+        List<Question> questions = new ArrayList<>();
+        db = getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + "dimityrTalevTable", null);
+
+        if(c.moveToFirst()){
+            do{
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION4)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionTable.COLUMN_ANSWER_NR)));
+                questions.add(question);
+            }while (c.moveToNext());
+        }
+
+        c.close();
+
+        return questions;
+    }
+
+
+    //dimityrTalevTable
 
 }
