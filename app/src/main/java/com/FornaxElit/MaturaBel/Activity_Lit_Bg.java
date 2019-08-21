@@ -796,6 +796,7 @@ public class Activity_Lit_Bg extends AppCompatActivity {
                 textAnalysis = R.string.analysis_dqdo_joco_gleda;
                 break;
             case "\"Чичовци\"":
+                textAnalysis = R.string.analysis_chichovci;
                 break;
             case "\"Под игото\"":
                 textAnalysis = R.string.analysis_pod_igoto;
@@ -924,6 +925,7 @@ public class Activity_Lit_Bg extends AppCompatActivity {
                 textAnalysis = R.string.analysis_zimni_vecheri;
                 break;
             case "\"Септември\"":
+                textAnalysis = R.string.analysis_septemvri;
                 break;
             case "\"Прозорец\"":
                 textAnalysis = R.string.analysis_prozorec;
