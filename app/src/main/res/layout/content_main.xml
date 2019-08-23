@@ -154,7 +154,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                ads:adUnitId="ca-app-pub-5283989799923871/7453013292"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

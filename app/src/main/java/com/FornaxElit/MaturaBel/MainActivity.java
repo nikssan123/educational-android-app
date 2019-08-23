@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         loadAd();
 
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        interstitialAd.setAdUnitId("ca-app-pub-5283989799923871/9631140991");
         if(BuildConfig.DEBUG) {
             interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
         }else {

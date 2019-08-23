@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:adSize="LARGE_BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:adUnitId="ca-app-pub-5283989799923871/4322973997"
             android:layout_alignParentBottom="true"
             >
 
