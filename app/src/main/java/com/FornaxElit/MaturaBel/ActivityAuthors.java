@@ -30,7 +30,11 @@ public class ActivityAuthors extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authors);
+        if(!remove_ads) {
+            setContentView(R.layout.activity_authors);
+        }else {
+            setContentView(R.layout.activity_authors_no_ads);
+        }
 
         adView = findViewById(R.id.bannerAdViewAuthors);
         textViewAuthorName = findViewById(R.id.textViewAuthorNameForHisWork);
