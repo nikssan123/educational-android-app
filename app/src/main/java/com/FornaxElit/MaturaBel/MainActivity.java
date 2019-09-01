@@ -1,14 +1,34 @@
 package com.FornaxElit.MaturaBel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.PriceChangeConfirmationListener;
+import com.android.billingclient.api.PriceChangeFlowParams;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchaseHistoryResponseListener;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.RewardLoadParams;
+import com.android.billingclient.api.RewardResponseListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -16,9 +36,11 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -39,12 +61,16 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private SharedPreferences sharedPreferences;
+    private BillingClient billingClient;
     AdView adView;
+    boolean remove_ads;
     boolean isAdLoaded = true;
     static boolean isFirstOpen = true;
     InterstitialAd interstitialAd;
@@ -69,6 +95,9 @@ public class MainActivity extends AppCompatActivity
 
 
         MobileAds.initialize(this, "ca-app-pub-5283989799923871~6950893953");
+
+        sharedPreferences = getSharedPreferences("removed_ads", MODE_PRIVATE);
+        remove_ads = sharedPreferences.getBoolean("remove_ads_boolean", false);
 
         adView = findViewById(R.id.bannerAdViewMain);
         loadAd();
@@ -104,9 +133,6 @@ public class MainActivity extends AppCompatActivity
         //display it no more than two times
         //action bellow is executed on positive answer from alertDialog
        // this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + APP_PNAME)));
-
-
-
     }
 
     @Override
@@ -163,11 +189,61 @@ public class MainActivity extends AppCompatActivity
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.small_owl_pic_transperent)
                     .setTitle("Премахнете рекламите!")
-                    .setMessage("Искате ли да премахнете рекламите за 4 лева!")
+                    .setMessage("Искате ли да премахнете рекламите за 4 лева?")
                     .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
+                            billingClient = BillingClient.newBuilder(MainActivity.this)
+                                    .setListener(new PurchasesUpdatedListener() {
+                                        @Override
+                                        public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+                                            if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null){
+                                                for(Purchase purchase : purchases){
+                                                    handlePurchases(purchase);
+
+                                                }
+                                            }else if( billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED){
+                                                Toast.makeText(MainActivity.this, "Неуспешна покупка!", Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(MainActivity.this, "Неуспешна покупка!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    })
+                                    .enablePendingPurchases()
+                                    .build();
+                            billingClient.startConnection(new BillingClientStateListener() {
+                                @Override
+                                public void onBillingSetupFinished(BillingResult billingResult) {
+                                    if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+                                        List<String> skuList = new ArrayList<>();
+                                        skuList.add("remove_ads");
+                                        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+                                        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+                                        billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
+                                            @Override
+                                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                                                if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && skuDetailsList != null){
+                                                    for(SkuDetails skuDetails : skuDetailsList){
+                                                        BillingFlowParams flowParams = BillingFlowParams.newBuilder()
+                                                                .setSkuDetails(skuDetails)
+                                                                .build();
+                                                        billingClient.launchBillingFlow(MainActivity.this, flowParams);
+
+
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onBillingServiceDisconnected() {
+                                    Toast.makeText(MainActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
                         }
                     })
                     .setNegativeButton("Не", null)
@@ -175,7 +251,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        //testing
 
         return super.onOptionsItemSelected(item);
     }
@@ -390,6 +465,29 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void handlePurchases(Purchase purchase){
+        AcknowledgePurchaseResponseListener acknowledgePurchaseResponseListener = new AcknowledgePurchaseResponseListener() {
+            @Override
+            public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
+                
+                Log.i("Something", "Something");
+            }
+        };
+
+        if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
+
+            remove_ads = true;
+            sharedPreferences.edit().putBoolean("remove_ads_boolean", remove_ads).apply();
+        }
+
+        if(!purchase.isAcknowledged()){
+            AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+                    .setPurchaseToken(purchase.getPurchaseToken())
+                    .build();
+            billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener);
+        }
+
+    }
 
 
 }
