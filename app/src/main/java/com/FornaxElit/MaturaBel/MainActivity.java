@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     private BillingClient billingClient;
     private SkuDetails ad_removal = null;
     AdView adView;
-    boolean remove_ads;
+    static boolean remove_ads;
     boolean isAdLoaded = true;
     static boolean isFirstOpen = true;
     InterstitialAd interstitialAd;
@@ -105,12 +105,13 @@ public class MainActivity extends AppCompatActivity
 
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-5283989799923871/9631140991");
-        if(BuildConfig.DEBUG) {
-            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-        }else {
-            interstitialAd.loadAd(new AdRequest.Builder().build());
+        if(!remove_ads) {
+            if (BuildConfig.DEBUG) {
+                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            } else {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
         }
-        //interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 
 
         boolean isNetworkAvailable = isNetworkAvailable();
@@ -251,12 +252,13 @@ public class MainActivity extends AppCompatActivity
                     isAdLoaded = true;
                     intent.putExtra("isAdLoaded", isAdLoaded);
                     startActivity(intent);
-                    if(BuildConfig.DEBUG) {
-                        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                    }else {
-                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    if(!remove_ads) {
+                        if (BuildConfig.DEBUG) {
+                            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                        } else {
+                            interstitialAd.loadAd(new AdRequest.Builder().build());
+                        }
                     }
-                   // interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
                 }
             });
 
@@ -315,13 +317,15 @@ public class MainActivity extends AppCompatActivity
     //could've made this made static but forgot and now this method can be seen in almost every activity
     public void loadAd(){
         //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).
-        AdRequest adRequest;
-        if(BuildConfig.DEBUG){
-            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        }else{
-          adRequest = new AdRequest.Builder().build();
+        if(!remove_ads) {
+            AdRequest adRequest;
+            if (BuildConfig.DEBUG) {
+                adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            } else {
+                adRequest = new AdRequest.Builder().build();
+            }
+            adView.loadAd(adRequest);
         }
-        adView.loadAd(adRequest);
 
     }
 
@@ -345,16 +349,18 @@ public class MainActivity extends AppCompatActivity
 
     //method which is displayed through out the app and displays a snackBar if(aboveMethod returns false)
     public static void showSnackbar(final ConstraintLayout constraintLayout1){
-        Snackbar snackbar = Snackbar.make(constraintLayout1, "Моля, включете си интернета :)", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Разбрах", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(constraintLayout1, "Благодаря за разбирането!", Snackbar.LENGTH_SHORT);
-                        snackbar1.show();
-                    }
-                })
-                .setActionTextColor(Color.rgb(9, 167, 9));
-        snackbar.show();
+        if(!remove_ads) {
+            Snackbar snackbar = Snackbar.make(constraintLayout1, "Моля, включете си интернета :)", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Разбрах", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Snackbar snackbar1 = Snackbar.make(constraintLayout1, "Благодаря за разбирането!", Snackbar.LENGTH_SHORT);
+                            snackbar1.show();
+                        }
+                    })
+                    .setActionTextColor(Color.rgb(9, 167, 9));
+            snackbar.show();
+        }
     }
 
     //the two methods bellow delete the cache
@@ -427,12 +433,13 @@ public class MainActivity extends AppCompatActivity
             public void onAdClosed() {
                 super.onAdClosed();
                 startActivity(intent);
-                if(BuildConfig.DEBUG) {
-                    interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                }else {
-                    interstitialAd.loadAd(new AdRequest.Builder().build());
+                if(!remove_ads) {
+                    if (BuildConfig.DEBUG) {
+                        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                    } else {
+                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
                 }
-                //interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
             }
         });
 
@@ -445,18 +452,18 @@ public class MainActivity extends AppCompatActivity
                     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
                         if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null){
                             for(Purchase purchase : purchases){
-                                Toast.makeText(MainActivity.this, "Congrats!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Поздравления!", Toast.LENGTH_SHORT).show();
                                 handlePurchases(purchase);
 
                             }
                         }else if( billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED){
-                            Toast.makeText(MainActivity.this, "Неуспешна покупка! fd", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Неуспешна покупка!", Toast.LENGTH_SHORT).show();
                         }else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED){
                             Toast.makeText(MainActivity.this, "Продуктът вече е закупен!", Toast.LENGTH_SHORT).show();
                             sharedPreferences.edit().putBoolean("remove_ads_boolean", true).apply();
                         }
                         else {
-                            Toast.makeText(MainActivity.this, "Неуспешна покупка! 1", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Неуспешна покупка!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -465,36 +472,26 @@ public class MainActivity extends AppCompatActivity
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
-                Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                 if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
                     List<String> skuList = new ArrayList<>();
-                    skuList.add("android.test.purchased");
-                    //skuList.add("remove_ads");
+                    skuList.add("remove_ads");
                     SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
                     params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
                     billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
                         @Override
                         public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-                            Toast.makeText(MainActivity.this, "Does it work", Toast.LENGTH_SHORT).show();
                             if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && skuDetailsList != null){
                                 for(SkuDetails skuDetails : skuDetailsList){
-                                    String sku = skuDetails.getSku();
-                                    if("android.test.purchased".equals(sku)){
-                                        Log.i("Info", "working");
-                                    }
-                                    //ad_removal = skuDetails;
-                                    // Log.i("Find", "working?");
+                                    ad_removal = skuDetails;
                                 }
                             }
                         }
                     });
                 }
             }
-
             @Override
             public void onBillingServiceDisconnected() {
                 Toast.makeText(MainActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -503,7 +500,6 @@ public class MainActivity extends AppCompatActivity
         AcknowledgePurchaseResponseListener acknowledgePurchaseResponseListener = new AcknowledgePurchaseResponseListener() {
             @Override
             public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
-
                 Log.i("Something", "Something");
             }
         };

@@ -25,6 +25,8 @@ import com.FornaxElit.MaturaBel.ui.main.SectionsPagerAdapter;
 
 import java.util.Random;
 
+import static com.FornaxElit.MaturaBel.MainActivity.remove_ads;
+
 public class activity_introduction_analysis extends AppCompatActivity {
 
     InterstitialAd interstitialAd;
@@ -41,12 +43,13 @@ public class activity_introduction_analysis extends AppCompatActivity {
 
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-5283989799923871/9247997615");
-        if(BuildConfig.DEBUG) {
-            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-        }else {
-            interstitialAd.loadAd(new AdRequest.Builder().build());
+        if(!remove_ads) {
+            if (BuildConfig.DEBUG) {
+                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            } else {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
         }
-        //interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -140,12 +143,13 @@ public class activity_introduction_analysis extends AppCompatActivity {
                     public void onAdClosed() {
                         super.onAdClosed();
                         finish();
-                        if(BuildConfig.DEBUG) {
-                            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                        }else {
-                            interstitialAd.loadAd(new AdRequest.Builder().build());
+                        if(!remove_ads) {
+                            if (BuildConfig.DEBUG) {
+                                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                            } else {
+                                interstitialAd.loadAd(new AdRequest.Builder().build());
+                            }
                         }
-                       // interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
                     }
                 });
             } else {
@@ -164,12 +168,13 @@ public class activity_introduction_analysis extends AppCompatActivity {
                 public void onAdClosed() {
                     super.onAdClosed();
                     finish();
-                    if(BuildConfig.DEBUG) {
-                        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                    }else {
-                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    if(!remove_ads) {
+                        if (BuildConfig.DEBUG) {
+                            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                        } else {
+                            interstitialAd.loadAd(new AdRequest.Builder().build());
+                        }
                     }
-                   // interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
                 }
             });
         }

@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.FornaxElit.MaturaBel.MainActivity.deleteCache;
+import static com.FornaxElit.MaturaBel.MainActivity.remove_ads;
 
 
 public class ActivityQuiz extends AppCompatActivity {
@@ -115,10 +116,12 @@ public class ActivityQuiz extends AppCompatActivity {
         loadAd();
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-5283989799923871/6813405969");
-        if(BuildConfig.DEBUG) {
-            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-        }else {
-            interstitialAd.loadAd(new AdRequest.Builder().build());
+        if(!remove_ads) {
+            if (BuildConfig.DEBUG) {
+                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            } else {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
         }
 
 
@@ -268,13 +271,15 @@ public class ActivityQuiz extends AppCompatActivity {
     public void loadAd(){
         //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         //adView.loadAd(adRequest);
-        AdRequest adRequest;
-        if(BuildConfig.DEBUG){
-            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        }else{
-            adRequest = new AdRequest.Builder().build();
+        if(!remove_ads) {
+            AdRequest adRequest;
+            if (BuildConfig.DEBUG) {
+                adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            } else {
+                adRequest = new AdRequest.Builder().build();
+            }
+            adView.loadAd(adRequest);
         }
-        adView.loadAd(adRequest);
     }
 
     public void newQuestionLoad(){
@@ -360,10 +365,12 @@ public class ActivityQuiz extends AppCompatActivity {
                     public void onAdClosed() {
                         super.onAdClosed();
                         startActivity(intent);
-                        if(BuildConfig.DEBUG) {
-                            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                        }else {
-                            interstitialAd.loadAd(new AdRequest.Builder().build());
+                        if(!remove_ads) {
+                            if (BuildConfig.DEBUG) {
+                                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                            } else {
+                                interstitialAd.loadAd(new AdRequest.Builder().build());
+                            }
                         }
                     }
                 });

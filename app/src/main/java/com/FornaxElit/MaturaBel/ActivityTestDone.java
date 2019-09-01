@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import static com.FornaxElit.MaturaBel.MainActivity.remove_ads;
+
 public class ActivityTestDone extends AppCompatActivity {
 
     TextView textViewScore, textViewReview;
@@ -63,13 +65,15 @@ public class ActivityTestDone extends AppCompatActivity {
     public void loadAd(){
         //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         //adView.loadAd(adRequest);
-        AdRequest adRequest;
-        if(BuildConfig.DEBUG){
-            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        }else{
-            adRequest = new AdRequest.Builder().build();
+        if(!remove_ads) {
+            AdRequest adRequest;
+            if (BuildConfig.DEBUG) {
+                adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            } else {
+                adRequest = new AdRequest.Builder().build();
+            }
+            adView.loadAd(adRequest);
         }
-        adView.loadAd(adRequest);
     }
 
     public void goToHomeMenu(View view){

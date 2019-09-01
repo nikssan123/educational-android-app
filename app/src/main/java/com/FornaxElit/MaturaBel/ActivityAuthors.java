@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import static com.FornaxElit.MaturaBel.MainActivity.remove_ads;
+
 
 //SET on exit activity ad listener to load new activity
 
@@ -67,13 +69,15 @@ public class ActivityAuthors extends AppCompatActivity {
     public void loadAd(){
        // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
       //  adView.loadAd(adRequest);
-        AdRequest adRequest;
-        if(BuildConfig.DEBUG){
-            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        }else{
-            adRequest = new AdRequest.Builder().build();
+        if(!remove_ads) {
+            AdRequest adRequest;
+            if (BuildConfig.DEBUG) {
+                adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            } else {
+                adRequest = new AdRequest.Builder().build();
+            }
+            adView.loadAd(adRequest);
         }
-        adView.loadAd(adRequest);
     }
 
     private String getAuthorName(){

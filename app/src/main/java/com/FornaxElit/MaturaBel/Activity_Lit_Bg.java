@@ -27,6 +27,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.FornaxElit.MaturaBel.MainActivity.remove_ads;
 import static com.FornaxElit.MaturaBel.MainActivity.showSnackbar;
 
 
@@ -52,7 +53,11 @@ public class Activity_Lit_Bg extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__lit__bg);
+        if(!remove_ads) {
+            setContentView(R.layout.activity__lit__bg);
+        }else{
+            setContentView(R.layout.activity_lit_bg_no_ads);
+        }
 
         constraintLayout = findViewById(R.id.constrainLayoutLitBg);
         adView = findViewById(R.id.bannerAdViewAuthorList);
@@ -60,12 +65,13 @@ public class Activity_Lit_Bg extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvListActivity2);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-5283989799923871/4378814315");
-        if(BuildConfig.DEBUG) {
-            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-        }else {
-            interstitialAd.loadAd(new AdRequest.Builder().build());
+        if(!remove_ads) {
+            if (BuildConfig.DEBUG) {
+                interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            } else {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
         }
-       // interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 
 
         isNetworkAvailable = isNetworkAvailable();
@@ -556,13 +562,15 @@ public class Activity_Lit_Bg extends AppCompatActivity {
     public void loadAd(){
        // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         //adView.loadAd(adRequest);
-        AdRequest adRequest;
-        if(BuildConfig.DEBUG){
-            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        }else{
-            adRequest = new AdRequest.Builder().build();
+        if(!remove_ads) {
+            AdRequest adRequest;
+            if (BuildConfig.DEBUG) {
+                adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            } else {
+                adRequest = new AdRequest.Builder().build();
+            }
+            adView.loadAd(adRequest);
         }
-        adView.loadAd(adRequest);
     }
 
 
@@ -616,12 +624,13 @@ public class Activity_Lit_Bg extends AppCompatActivity {
                 isAdLoaded = true;
                 intent.putExtra("isAdLoaded", isAdLoaded);
                 startActivity(intent);
-                if(BuildConfig.DEBUG) {
-                    interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                }else {
-                    interstitialAd.loadAd(new AdRequest.Builder().build());
+                if(!remove_ads) {
+                    if (BuildConfig.DEBUG) {
+                        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                    } else {
+                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
                 }
-              //  interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
             }
         });
 
@@ -664,12 +673,13 @@ public class Activity_Lit_Bg extends AppCompatActivity {
                 isAdLoaded = true;
                 intent.putExtra("isAdLoaded", isAdLoaded);
                 startActivity(intent);
-                if(BuildConfig.DEBUG) {
-                    interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-                }else {
-                    interstitialAd.loadAd(new AdRequest.Builder().build());
+                if(!remove_ads) {
+                    if (BuildConfig.DEBUG) {
+                        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                    } else {
+                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
                 }
-                //interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
             }
         });
 
