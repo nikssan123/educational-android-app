@@ -1,6 +1,7 @@
 package com.FornaxElit.MaturaBel;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -18,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -157,6 +159,20 @@ public class MainActivity extends AppCompatActivity
             isFirstOpen = false;
             startActivity(intent);
             return true;
+        }else if(id == R.id.remove_ads){
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.small_owl_pic_transperent)
+                    .setTitle("Премахнете рекламите!")
+                    .setMessage("Искате ли да премахнете рекламите за 4 лева!")
+                    .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    })
+                    .setNegativeButton("Не", null)
+                    .show();
+
         }
 
         return super.onOptionsItemSelected(item);

@@ -11,4 +11,10 @@
         android:orderInCategory="200"
         android:title="Privacy Policy"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/remove_ads"
+        android:orderInCategory="200"
+        android:title="Премахнете рекламите"
+        app:showAsAction="never"/>
 </menu>
