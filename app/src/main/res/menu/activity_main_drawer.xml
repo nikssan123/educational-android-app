@@ -46,7 +46,7 @@
                 android:title="Privacy Policy"/>
             <item
                 android:id="@+id/nav_remove_ads"
-                android:icon="@drawable/baseline_vpn_key_black_18dp"
+                android:icon="@drawable/baseline_block_black_18dp"
                 android:title="Премахнете рекламите"/>
         </menu>
     </item>

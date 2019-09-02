@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferences sharedPreferences;
     private BillingClient billingClient;
     private SkuDetails ad_removal = null;
+    String skuPriceRemoveAds;
     AdView adView;
     static boolean remove_ads;
     boolean isAdLoaded = true;
@@ -190,11 +191,14 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.remove_ads){
 
             setBillingClient();
+            if(skuPriceRemoveAds == null){
+                skuPriceRemoveAds = "5,00 BGN";
+            }
 
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.small_owl_pic_transperent)
                     .setTitle("Премахнете рекламите!")
-                    .setMessage("Искате ли да премахнете рекламите за: 4,49BGN?")
+                    .setMessage("Искате ли да премахнете рекламите за: " + skuPriceRemoveAds + "?")
                     .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -286,11 +290,14 @@ public class MainActivity extends AppCompatActivity
             return true;
         }else if(id == R.id.nav_remove_ads){
             setBillingClient();
+            if(skuPriceRemoveAds == null){
+                skuPriceRemoveAds = "5,00 BGN";
+            }
 
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.small_owl_pic_transperent)
                     .setTitle("Премахнете рекламите!")
-                    .setMessage("Искате ли да премахнете рекламите за: 4,49BGN?")
+                    .setMessage("Искате ли да премахнете рекламите за: " + skuPriceRemoveAds + "?")
                     .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -483,6 +490,7 @@ public class MainActivity extends AppCompatActivity
                             if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && skuDetailsList != null){
                                 for(SkuDetails skuDetails : skuDetailsList){
                                     ad_removal = skuDetails;
+                                    skuPriceRemoveAds = skuDetails.getPrice();
                                 }
                             }
                         }
