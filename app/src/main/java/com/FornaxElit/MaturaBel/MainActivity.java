@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        setBillingClient();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -190,9 +191,9 @@ public class MainActivity extends AppCompatActivity
             return true;
         }else if(id == R.id.remove_ads){
 
-            setBillingClient();
+            //setBillingClient();
             if(skuPriceRemoveAds == null){
-                skuPriceRemoveAds = "5,00 BGN";
+                skuPriceRemoveAds = "BGN 4,99";
             }
 
             new AlertDialog.Builder(this)
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        setBillingClient();
 
         if (id == R.id.nav_testsLit) {
            // Toast.makeText(this, "Ко стаа авер", Toast.LENGTH_SHORT).show();
@@ -289,9 +291,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }else if(id == R.id.nav_remove_ads){
-            setBillingClient();
+            //setBillingClient();
             if(skuPriceRemoveAds == null){
-                skuPriceRemoveAds = "5,00 BGN";
+                skuPriceRemoveAds = "BGN 4,99";
             }
 
             new AlertDialog.Builder(this)
