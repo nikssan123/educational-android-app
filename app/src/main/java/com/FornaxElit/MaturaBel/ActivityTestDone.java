@@ -39,7 +39,7 @@ public class ActivityTestDone extends AppCompatActivity {
         if(counterRightAnswered < 6){
             textViewReview.setText("Опа ... я пробвай пак :)");
         }else if(counterRightAnswered <11){
-            textViewReview.setText("Но е зле, но пробвай да пререшиш теста!");
+            textViewReview.setText("Не е зле, но пробвай да пререшиш теста!");
         }else if(counterRightAnswered < 16){
             textViewReview.setText("Добра работа! Ама може и по-добре :)");
         } else if(counterRightAnswered < 20){
