@@ -125,7 +125,7 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="60dp"
                     android:gravity="start"
-                    android:text='- "Борба" \n- "Моята молитва"'
+                    android:text='- "Елегия" \n- "Борба" \n- "Моята молитва" \n- "До моето първо либе"'
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
@@ -154,7 +154,7 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="60dp"
                     android:gravity="start"
-                    android:text='- "Елегия" \n- "Майце си" \n- "Към брата си" \n- "До моето първо либе"'
+                    android:text='- "Майце си" \n- "Към брата си" \n- "Обесването на Васил Левски"'
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"

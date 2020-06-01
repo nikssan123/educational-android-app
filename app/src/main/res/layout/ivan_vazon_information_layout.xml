@@ -126,7 +126,7 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="60dp"
                     android:gravity="start"
-                    android:text='- "При Рилския манастир"'
+                    android:text='- "При Рилския манастир" \n- "Отечество любезно"'
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
@@ -184,7 +184,7 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="60dp"
                     android:gravity="start"
-                    android:text='- "Отечество любезно" \n- "Българският език"'
+                    android:text='- "Българският език"'
                     android:textAlignment="textStart"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"

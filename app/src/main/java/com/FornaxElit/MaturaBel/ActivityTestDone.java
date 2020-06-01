@@ -41,11 +41,11 @@ public class ActivityTestDone extends AppCompatActivity {
         }else if(counterRightAnswered <11){
             textViewReview.setText("Не е зле, но пробвай да пререшиш теста!");
         }else if(counterRightAnswered < 16){
-            textViewReview.setText("Добра работа! Ама може и по-добре :)");
+            textViewReview.setText("Добра работа! Ама може и по-  добре :)");
         } else if(counterRightAnswered < 20){
             textViewReview.setText("Браво! Трябва още малко усилие обаче :)");
         }else if(counterRightAnswered == 20){
-            textViewReview.setText("Отлчино! Матура-Матата");
+            textViewReview.setText("Отлично!");
         }
 
     }
