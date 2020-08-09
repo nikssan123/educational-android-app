@@ -1,4 +1,4 @@
-# Android Educational App
+# Educational Android App
 
 ## Descrription
 An android app, which aims to provide additional help to Bulgarian high school students for their state exam. The app is published on the Google Play Store and has over 10, 000 downloads and 99 reviews - 4.5.
